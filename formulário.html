@@ -1,0 +1,63 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário Atividade 2</title>
+    <link rel="stylesheet" href="cssindex.css">
+    
+    <script type="text/javascript">
+        window.addEventListener("load", () => {
+            const formulario = document.forms["novoFormulario"];
+            const nomeInput = document.getElementById("nome");
+            const idadeInput = document.getElementById("idade");
+            
+            nomeInput.setAttribute("placeholder", "Digite seu nome completo");
+            idadeInput.setAttribute("placeholder", "Digite sua idade");
+        
+            formulario.addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const resultadoDiv = document.getElementById("resultado");
+            const nomeRaw = nomeInput.value.trim();
+            const idadeRaw = idadeInput.value.trim();
+
+            if (nomeRaw === "" || idadeRaw === "") {
+                resultadoDiv.innerHTML = "Por favor, preencha todos os campos de dados!";
+                resultadoDiv.classList.add("resultado-estilo");
+                return;
+            }
+
+            const nomeMaiusculo = nomeRaw.toUpperCase();
+            const idade = parseInt(idadeRaw);
+
+            let mensagem = "";
+
+            if (idade >= 18) {
+                mensagem = `${nomeMaiusculo} tem ${idade} anos e é MAIOR de idade.`;
+            } else {
+                mensagem = `${nomeMaiusculo} tem ${idade} anos e é MENOR de idade.`;
+            }
+
+            resultadoDiv.innerHTML = mensagem;
+
+            resultadoDiv.classList.add("resultado-estilo");
+        });
+
+        });
+
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Formulário de Nome e Idade</h2>
+            <form name="novoFormulario" onsubmit="">
+                Nome <input type="text" id="nome" name="nome" autofocus><br><br>
+                Idade <input type="number" id="idade" name="idade"><br><br>
+
+                <input type="submit" value="Exibir Dados"/>
+            </form>
+
+        <div id="resultado"></div>
+    </div>
+</body>
+</html>
